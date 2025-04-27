@@ -161,7 +161,9 @@ def predict():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({'status': 'healthy'}), 200
+    response = jsonify({'status': 'healthy'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
 
 if __name__ == '__main__':
     CORS(app, resources={r"/predict": {"origins": "*"}})
